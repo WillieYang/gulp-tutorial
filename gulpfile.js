@@ -7,7 +7,7 @@ gulp.task('hello', () => {
 });
 
 gulp.task('sass', () =>
-  gulp.src('app/scss/styles.scss')
+  gulp.src('app/scss/**/*.scss')
       .pipe(sass())
       .pipe(gulp.dest('app/css'))
 );
