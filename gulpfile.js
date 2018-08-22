@@ -11,3 +11,7 @@ gulp.task('sass', () =>
       .pipe(sass())
       .pipe(gulp.dest('app/css'))
 );
+
+gulp.task('watch', () =>
+  gulp.watch('app/scss/**/*.scss', ['sass'])
+);
