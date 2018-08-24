@@ -19,7 +19,6 @@ gulp.task('sass', () =>
 
 gulp.task('browserSync', () =>
   browserSync.init({
-    injectChanges: true,
     server: {
       baseDir: 'app'
     },
