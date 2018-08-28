@@ -11,6 +11,7 @@ let gulpIf = require('gulp-if');
 let cssnano = require('gulp-cssnano');
 let imagemin = require('gulp-imagemin');
 let cache = require('gulp-cache');
+let del = require('del');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -57,4 +58,8 @@ gulp.task('images', () =>
 gulp.task('fonts', () =>
   gulp.src('app/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'))
+);
+
+gulp.task('clean:dist', () =>
+  del.sync('dist')
 );
