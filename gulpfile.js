@@ -8,6 +8,7 @@ let useref = require('gulp-useref');
 // Other requires...
 let uglify = require('gulp-uglify-es').default;
 let gulpIf = require('gulp-if');
+let cssnano = require('gulp-cssnano');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -39,5 +40,6 @@ gulp.task('useref', () =>
   gulp.src('app/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
 );
