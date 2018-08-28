@@ -5,6 +5,9 @@ let sass = require('gulp-sass');
 let browserSync = require('browser-sync').create();
 // Requires the useref plugin
 let useref = require('gulp-useref');
+// Other requires...
+let uglify = require('gulp-uglify-es').default;
+let gulpIf = require('gulp-if');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -35,5 +38,6 @@ gulp.task('watch', ['sass', 'browserSync'], () => {
 gulp.task('useref', () =>
   gulp.src('app/*.html')
     .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
     .pipe(gulp.dest('dist'))
 );
