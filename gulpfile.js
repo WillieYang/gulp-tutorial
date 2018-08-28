@@ -9,6 +9,8 @@ let useref = require('gulp-useref');
 let uglify = require('gulp-uglify-es').default;
 let gulpIf = require('gulp-if');
 let cssnano = require('gulp-cssnano');
+let imagemin = require('gulp-imagemin');
+let cache = require('gulp-cache');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -42,4 +44,12 @@ gulp.task('useref', () =>
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
+);
+
+gulp.task('images', () =>
+  gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
+    .pipe(cache(imagemin({
+        interlaced: true
+      })))
+    .pipe(gulp.dest('dist/images'))
 );
