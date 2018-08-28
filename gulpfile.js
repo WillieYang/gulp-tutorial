@@ -12,6 +12,7 @@ let cssnano = require('gulp-cssnano');
 let imagemin = require('gulp-imagemin');
 let cache = require('gulp-cache');
 let del = require('del');
+let runSequence = require('run-sequence');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -62,4 +63,12 @@ gulp.task('fonts', () =>
 
 gulp.task('clean:dist', () =>
   del.sync('dist')
+);
+
+gulp.task('build', (callback) =>
+  runSequence('clean:dist', ['sass', 'useref', 'images', 'fonts'], callback)
+);
+
+gulp.task('default', (callback) =>
+  runSequence(['sass', 'browserSync', 'watch'], callback)
 );
