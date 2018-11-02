@@ -13,6 +13,8 @@ let imagemin = require('gulp-imagemin');
 let cache = require('gulp-cache');
 let del = require('del');
 let runSequence = require('run-sequence');
+let replace = require('gulp-replace');
+let cn = require('./lang/cn');
 
 gulp.task('hello', () => {
   console.log('Hello World');
@@ -72,3 +74,35 @@ gulp.task('build', (callback) =>
 gulp.task('default', (callback) =>
   runSequence(['sass', 'browserSync', 'watch'], callback)
 );
+
+gulp.task('templates', function(){
+    gulp.src(['cathay.txt'])
+    .pipe(replace(/[\u4e00-\u9fa5]+/g, function(match, p1, offset, string) {
+        // Replace foobaz with barbaz and log a ton of information
+        // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
+        // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
+        // if(match == '中国') {
+        //     return 'China';
+        // } else if (match == '人') {
+        //     return 'people';
+        // } else if (match == '民') {
+        //     return 'citizen'
+        // }
+        // console.log(cn);
+        let template;
+        for (let key in cn) {
+            let value = cn[key]
+            if(value == match) {
+                template = key
+            }
+        }
+        if (template) {
+            let str = `$t('${template}')`
+            console.log(`i18n: ${template}`)
+            return str
+        } else {
+            return match
+        }
+    }))
+    .pipe(gulp.dest('build/'));
+});

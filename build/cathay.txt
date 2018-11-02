@@ -1,0 +1,7 @@
+foobaz
+
+$t('china')
+  人
+
+民
+
