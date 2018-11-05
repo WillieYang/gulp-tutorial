@@ -77,7 +77,7 @@ gulp.task('default', (callback) =>
 
 gulp.task('templates', function(){
     gulp.src(['cathay.txt'])
-    .pipe(replace(/[\u4e00-\u9fa5]+/g, function(match, p1, offset, string) {
+    .pipe(replace(/[\u4e00-\u9fa5]+/g, function(match) {
         // Replace foobaz with barbaz and log a ton of information
         // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
         // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
